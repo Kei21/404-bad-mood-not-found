@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404: BAD MOOD NOT FOUND — Happy Life Project</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans (Display), Inter (Body), JetBrains Mono (404 Status Motif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cream: '#FFFDF7',
+            sunbeam: '#FEF3C7',
+            peach: '#FFEDD5',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CUSTOM ANIMATIONS & VISUAL POLISH
+       ========================================================================== */
+    :root {
+      --bg-warm: #FFFDF7;
+      --ink-primary: #1E293B;
+    }
+
+    body {
+      background-color: var(--bg-warm);
+      background-image:
+        radial-gradient(circle at 12% 15%, rgba(253, 224, 71, 0.28) 0%, transparent 42%),
+        radial-gradient(circle at 88% 18%, rgba(251, 146, 60, 0.20) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(244, 114, 182, 0.14) 0%, transparent 48%);
+      color: var(--ink-primary);
+      overflow-x: hidden;
+    }
+
+    /* Gentle floating background shapes */
+    @keyframes floatSlow {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-18px) rotate(6deg);
+      }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(16px) rotate(-6deg);
+      }
+    }
+
+    .animate-float-slow {
+      animation: floatSlow 8s ease-in-out infinite;
+    }
+
+    .animate-float-reverse {
+      animation: floatReverse 9.5s ease-in-out infinite;
+    }
+
+    /* Tactile 3D Bouncy Happiness Button */
+    .happiness-btn {
+      background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 48%, #EA580C 100%);
+      box-shadow:
+        0 8px 0 #B45309,
+        0 16px 32px -6px rgba(234, 88, 12, 0.45);
+      transition: transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.14s ease, filter 0.2s ease;
+    }
+
+    .happiness-btn:hover {
+      transform: translateY(-3px) scale(1.015);
+      box-shadow:
+        0 11px 0 #B45309,
+        0 22px 38px -6px rgba(234, 88, 12, 0.55);
+      filter: brightness(1.03);
+    }
+
+    .happiness-btn:active,
+    .happiness-btn.is-pressed {
+      transform: translateY(5px) scale(0.985);
+      box-shadow:
+        0 3px 0 #B45309,
+        0 8px 16px -4px rgba(234, 88, 12, 0.35);
+    }
+
+    /* Subtle shimmer sweep across the main button */
+    @keyframes shimmerSweep {
+      0% { transform: translateX(-120%) skewX(-20deg); }
+      45%, 100% { transform: translateX(240%) skewX(-20deg); }
+    }
+
+    .btn-shimmer {
+      animation: shimmerSweep 4.2s infinite ease-in-out;
+    }
+
+    /* Smooth Card Reveal Animation */
+    @keyframes cardPopIn {
+      0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.96);
+      }
+      65% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .reveal-animate {
+      animation: cardPopIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Counter Pop Animation */
+    @keyframes counterBump {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.28); }
+      100% { transform: scale(1); }
+    }
+
+    .counter-bump {
+      animation: counterBump 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Subtle Grid Pattern in Background for Playful Tech/404 Vibe */
+    .bg-grid-dots {
+      background-image: radial-gradient(rgba(180, 83, 9, 0.12) 1.25px, transparent 1.25px);
+      background-size: 26px 26px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between bg-grid-dots relative selection:bg-amber-300 selection:text-slate-900">
+
+  <!-- Full-Screen Transparent Canvas for Confetti & Sparkle Bursts -->
+  <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Decorative Floating Background Shapes (Non-interactive) -->
+  <div aria-hidden="true" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <!-- Top Left Sun Circle -->
+    <div class="animate-float-slow absolute -top-10 -left-10 w-44 h-44 sm:w-64 sm:h-64 rounded-full bg-amber-300/25 blur-2xl"></div>
+    <!-- Top Right Floating Smile Badge -->
+    <div class="animate-float-reverse hidden md:flex items-center justify-center absolute top-16 right-12 w-16 h-16 rounded-2xl bg-white/80 border-2 border-amber-200 shadow-sm text-3xl rotate-12">
+      ☀️
+    </div>
+    <!-- Bottom Left Floating Sparkle Badge -->
+    <div class="animate-float-slow hidden md:flex items-center justify-center absolute bottom-28 left-12 w-14 h-14 rounded-2xl bg-white/80 border-2 border-rose-200 shadow-sm text-2xl -rotate-12">
+      ✨
+    </div>
+    <!-- Bottom Right Warm Glow -->
+    <div class="animate-float-reverse absolute -bottom-16 -right-10 w-56 h-56 sm:w-80 sm:h-80 rounded-full bg-orange-300/20 blur-2xl"></div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT WRAPPER
+       ========================================================================== -->
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-8 flex-grow flex flex-col items-center">
+
+    <!-- Top Utility Bar: 404 Error-Turned-Positive Status & Sound Toggle -->
+    <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
+      <!-- Playful 404 Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border-2 border-amber-300 shadow-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-bold tracking-wide text-slate-800">
+          STATUS 404 • BAD MOOD NOT FOUND • POSITIVITY LOADED
+        </span>
+      </div>
+
+      <!-- Right Controls: Smiles Shared Counter & Sound Toggle -->
+      <div class="flex items-center gap-2.5 ml-auto sm:ml-0">
+        <!-- Smiles Shared Counter -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/90 border-2 border-amber-300 text-amber-950 font-semibold text-xs sm:text-sm shadow-sm">
+          <span>😊 Smiles Shared:</span>
+          <span id="smilesCounter" class="font-mono font-extrabold text-base sm:text-lg text-orange-700">0</span>
+        </div>
+
+        <!-- Subtle Sound Toggle for Classroom Presentation -->
+        <button
+          id="soundToggleBtn"
+          type="button"
+          aria-label="Toggle celebratory chime sound"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-amber-50 border-2 border-slate-200 text-slate-700 font-medium text-xs sm:text-sm shadow-sm transition cursor-pointer"
+          title="Toggle gentle chime sound"
+        >
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel" class="hidden sm:inline">Chime On</span>
+        </button>
+
+        <!-- Built-In Classroom QR Code Button (Shortcut: Q) -->
+        <button
+          id="openQrModalBtn"
+          type="button"
+          aria-label="Open Classroom QR Code for whole-class participation"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white border-2 border-slate-900 font-semibold text-xs sm:text-sm shadow-sm transition cursor-pointer"
+          title="Show full-screen scannable QR code for the class (Shortcut: Q)"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <path d="M14 14h3v3h-3z"></path>
+            <path d="M20 14v3h-3"></path>
+            <path d="M14 20h3"></path>
+            <path d="M20 20h.01"></path>
+          </svg>
+          <span>Class QR Code</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="text-center max-w-3xl mx-auto mb-7 sm:mb-9">
+      <div class="inline-block px-3 py-1 mb-3 rounded-full bg-orange-100 text-orange-800 font-semibold text-xs sm:text-sm tracking-wide uppercase">
+        Happy Life Group Project
+      </div>
+
+      <h1 class="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-slate-900 leading-tight">
+        <span class="inline-block px-3 py-0.5 mr-1 rounded-2xl bg-amber-300 text-slate-950 shadow-sm transform -rotate-1">404:</span>
+        BAD MOOD NOT FOUND
+      </h1>
+
+      <p class="mt-3 sm:mt-4 font-display font-bold text-lg sm:text-2xl text-orange-600">
+        A click. A surprise. A little happiness.
+      </p>
+
+      <p class="mt-2.5 text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        We searched the entire internet for a bad mood and couldn’t find one! Press the button below whenever you need a quick laugh, a warm boost, or a small reason to smile.
+      </p>
+    </header>
+
+    <!-- Primary Call-to-Action Button -->
+    <div class="w-full flex flex-col items-center mb-8 sm:mb-10">
+      <button
+        id="happinessButton"
+        type="button"
+        class="happiness-btn relative overflow-hidden group w-full sm:w-auto px-7 sm:px-11 py-5 sm:py-6 rounded-3xl text-slate-950 font-display font-extrabold text-lg sm:text-2xl md:text-3xl tracking-wide uppercase border-2 border-amber-200 cursor-pointer select-none focus:outline-none focus:ring-4 focus:ring-amber-400/60"
+      >
+        <!-- Decorative Shimmer Sweep -->
+        <span aria-hidden="true" class="btn-shimmer pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"></span>
+
+        <span class="relative z-10 flex items-center justify-center gap-3">
+          <span class="text-2xl sm:text-3xl transition-transform duration-200 group-hover:scale-125 group-hover:rotate-12">🎉</span>
+          <span>PRESS ME WHEN YOU NEED HAPPINESS</span>
+        </span>
+      </button>
+      <p class="mt-3 text-xs sm:text-sm text-slate-500 font-medium">
+        Tip: Click the button or press <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-300 font-mono text-xs text-slate-700">Space</kbd> for an instant surprise • Press <kbd class="px-1.5 py-0.5 rounded bg-white border border-slate-300 font-mono text-xs text-slate-700">Q</kbd> for Class QR Code
+      </p>
+    </div>
+
+    <!-- ==========================================================================
+         BROWSER-WINDOW SURPRISE DISPLAY CARD (Positive 404 Motif)
+         ========================================================================== -->
+    <section
+      id="surpriseCard"
+      aria-live="polite"
+      class="w-full max-w-3xl bg-white rounded-3xl border-2 border-slate-900/10 shadow-[0_20px_50px_-12px_rgba(30,41,59,0.14)] overflow-hidden transition-all duration-300"
+    >
+      <!-- Browser Window Top Bar -->
+      <div class="bg-slate-100/95 border-b border-slate-200 px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+        <!-- Classic Browser Traffic Light Dots -->
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="w-3.5 h-3.5 rounded-full bg-rose-400 border border-rose-500/30"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-amber-400 border border-amber-500/30"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-emerald-400 border border-emerald-500/30"></span>
+        </div>
+
+        <!-- Faux Positive-404 Address Bar -->
+        <div class="flex-1 max-w-md mx-auto bg-white rounded-xl border border-slate-200/90 px-3 py-1 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono text-slate-500 truncate">
+          <span class="text-emerald-600 font-bold">🔒</span>
+          <span id="browserUrlText" class="truncate">happylife.edu/404-bad-mood-not-found</span>
+        </div>
+
+        <!-- Surprise Index Pill -->
+        <div id="surpriseIndexBadge" class="shrink-0 font-mono text-xs font-semibold text-slate-500 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
+          READY
+        </div>
+      </div>
+
+      <!-- Card Main Body -->
+      <div id="cardContentWrapper" class="p-6 sm:p-10 md:p-12 min-h-[250px] sm:min-h-[290px] flex flex-col items-center justify-center text-center">
+
+        <!-- Category Badge (Hidden until first click, or shows Welcome Badge initially) -->
+        <div
+          id="categoryBadge"
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm sm:text-base font-bold border-2 bg-amber-100 text-amber-900 border-amber-300 mb-5 sm:mb-6 shadow-xs"
+        >
+          <span id="categoryEmoji" class="text-lg sm:text-xl">☀️</span>
+          <span id="categoryLabel">Ready When You Are</span>
+        </div>
+
+        <!-- Main Surprise Message (High-Contrast, Large Projector-Friendly Typography) -->
+        <blockquote
+          id="surpriseMessage"
+          class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-slate-900 leading-snug sm:leading-tight max-w-2xl"
+        >
+          Your daily dose of positivity is standing by! Click the big orange button above to unlock your first surprise.
+        </blockquote>
+
+        <!-- Subtle Helper / Action Footer Inside Card -->
+        <div id="cardFooterBar" class="mt-7 pt-4 border-t border-slate-100 w-full flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-slate-500">
+          <span id="categoryHint" class="font-medium text-slate-500">
+            6 categories • 36 student-friendly surprises loaded
+          </span>
+
+          <!-- Copy Surprise Button (Visible once a surprise is generated) -->
+          <button
+            id="copySurpriseBtn"
+            type="button"
+            class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-900 font-semibold transition cursor-pointer"
+            title="Copy this message to share with a friend"
+          >
+            <span id="copyBtnIcon">📋</span>
+            <span id="copyBtnText">Copy Surprise</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         UNOBTRUSIVE CATEGORY FILTER PILLS (For Live Demo & Targeted Exploration)
+         ========================================================================== -->
+    <section aria-label="Filter surprises by category" class="w-full max-w-3xl mt-6 sm:mt-8">
+      <div class="flex flex-col items-center">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">
+          Demo Mode & Category Filter
+        </p>
+        <div id="filterPillsContainer" class="flex flex-wrap items-center justify-center gap-2">
+          <!-- Filter pills are dynamically rendered by JavaScript so counts & active states stay synced -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       PROJECT CLOSING FOOTER
+       ========================================================================== -->
+  <footer class="relative z-10 w-full border-t border-amber-200/70 bg-white/75 backdrop-blur-xs mt-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center">
+      <p class="font-display font-bold text-base sm:text-lg text-slate-900 mb-1.5">
+        One click. One surprise. One little reason to smile.
+      </p>
+      <p class="text-xs sm:text-sm md:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Happiness does not always need to come from something big. Sometimes, a joke, a kind word, a compliment, or a small moment shared with another person is enough to make the day feel a little brighter.
+      </p>
+      <p class="mt-3 font-mono text-xs text-amber-800/80">
+        404: BAD MOOD NOT FOUND • Happy Life University Group Project
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LECTURE-HALL CLASSROOM QR CODE MODAL (Zero-Dependency & Back-Row Scannable)
+       ========================================================================== -->
+  <div
+    id="qrModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="qrModalTitle"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xs"
+  >
+    <div
+      id="qrModalCard"
+      class="relative w-full max-w-lg bg-white rounded-3xl border-2 border-slate-200 shadow-2xl p-5 sm:p-7 text-center overflow-y-auto max-h-[95vh]"
+    >
+      <!-- Modal Top Header -->
+      <div class="flex items-start justify-between gap-3 text-left mb-4">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-mono font-bold text-xs uppercase tracking-wide mb-1">
+            Whole-Class Participation
+          </span>
+          <h2 id="qrModalTitle" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 leading-tight">
+            Scan to Join on Your Phone
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            Point your camera at the screen to open 404: BAD MOOD NOT FOUND
+          </p>
+        </div>
+
+        <button
+          id="closeQrModalBtn"
+          type="button"
+          aria-label="Close Classroom QR Code modal"
+          class="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition cursor-pointer"
+        >
+          <span>✕</span>
+          <span>Close (Esc)</span>
+        </button>
+      </div>
+
+      <!-- Friendly Local Preview Warning Banner (Shown automatically when opened via file:// or srcdoc) -->
+      <div
+        id="qrLocalNotice"
+        class="hidden mb-4 px-3.5 py-2.5 rounded-2xl bg-amber-50 border-2 border-amber-300 text-amber-950 text-xs sm:text-sm font-medium text-left flex items-start gap-2.5"
+      >
+        <span class="text-base leading-none mt-0.5">⚠️</span>
+        <span>Local preview detected — paste your hosted GitHub Pages / Netlify URL below to update the QR code</span>
+      </div>
+
+      <!-- High-Contrast Razor-Sharp QR Code Container (Generous White Quiet Zone) -->
+      <div class="flex flex-col items-center justify-center my-3">
+        <div class="p-4 sm:p-5 bg-white rounded-2xl border-2 border-slate-900/15 shadow-md inline-block">
+          <canvas
+            id="qrCanvas"
+            width="960"
+            height="960"
+            class="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] block bg-white"
+            style="image-rendering: pixelated;"
+            aria-label="Scannable QR Code for classroom participation"
+          ></canvas>
+        </div>
+        <p class="mt-2 font-mono text-[11px] sm:text-xs text-slate-500">
+          High-Contrast ECC-M • Designed for Back-Row Lecture Hall Scanning
+        </p>
+      </div>
+
+      <!-- Live Editable URL Input Field -->
+      <div class="mt-4 text-left">
+        <label for="qrUrlInput" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+          Encoded Website URL (Updates Live)
+        </label>
+        <div class="flex items-center gap-2">
+          <input
+            id="qrUrlInput"
+            type="url"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder="https://your-username.github.io/404-bad-mood-not-found/"
+            class="flex-1 min-w-0 px-3.5 py-2 rounded-xl bg-slate-50 border-2 border-slate-200 focus:border-amber-400 focus:bg-white focus:outline-none font-mono text-xs sm:text-sm text-slate-800"
+          />
+          <button
+            id="copyQrUrlBtn"
+            type="button"
+            class="shrink-0 px-3 py-2 rounded-xl bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-950 font-semibold text-xs sm:text-sm transition cursor-pointer"
+            title="Copy URL to clipboard"
+          >
+            <span id="copyQrUrlLabel">Copy Link</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Modal Action Buttons -->
+      <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2.5">
+        <button
+          id="downloadQrBtn"
+          type="button"
+          class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-xs transition cursor-pointer"
+        >
+          <span>⬇️</span>
+          <span>Download QR PNG</span>
+        </button>
+
+        <button
+          id="closeQrModalBottomBtn"
+          type="button"
+          class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm transition cursor-pointer"
+        >
+          <span>Done (Esc)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT: SURPRISE DATABASE, NO-REPEAT RANDOMIZER, CONFETTI & AUDIO
+       ========================================================================== -->
+  <script>
+    /**
+     * ============================================================================
+     * 1. SURPRISE CONTENT DATABASE (36 Items across 6 Categories)
+     * ----------------------------------------------------------------------------
+     * Group members can easily edit existing messages or add new objects below!
+     * Each item requires:
+     *   - id: Unique number
+     *   - category: Must match one of the 6 category keys in CATEGORY_STYLES
+     *   - text: The message displayed on screen
+     * ============================================================================
+     */
+    const SURPRISES = [
+      // --- CATEGORY 1: FUNNY JOKE (6 items) ---
+      {
+        id: 1,
+        category: "Funny Joke",
+        text: "Why did the student eat their homework? Because the teacher said it was a piece of cake!"
+      },
+      {
+        id: 2,
+        category: "Funny Joke",
+        text: "Why did the scarecrow win an award at university? Because he was outstanding in his field!"
+      },
+      {
+        id: 3,
+        category: "Funny Joke",
+        text: "What do you call a sleeping dinosaur? A dino-snore!"
+      },
+      {
+        id: 4,
+        category: "Funny Joke",
+        text: "Why don’t scientists trust atoms? Because they make up everything!"
+      },
+      {
+        id: 5,
+        category: "Funny Joke",
+        text: "What did the zero say to the eight? Nice belt!"
+      },
+      {
+        id: 6,
+        category: "Funny Joke",
+        text: "Why did the computer go to the doctor during finals week? Because it had a byte and needed a little cache-up!"
+      },
+
+      // --- CATEGORY 2: MOTIVATIONAL MESSAGE (6 items) ---
+      {
+        id: 7,
+        category: "Motivational Message",
+        text: "You do not have to have everything figured out. Just take the next small step."
+      },
+      {
+        id: 8,
+        category: "Motivational Message",
+        text: "Progress is still progress, even when it happens one tiny page or one deep breath at a time."
+      },
+      {
+        id: 9,
+        category: "Motivational Message",
+        text: "Think about how far you have already come compared to where you started. You are doing better than you think!"
+      },
+      {
+        id: 10,
+        category: "Motivational Message",
+        text: "Tough weeks do not last forever, and every small effort you put in today counts toward your future."
+      },
+      {
+        id: 11,
+        category: "Motivational Message",
+        text: "You do not need to be perfect to make meaningful progress—just keep showing up with kindness for yourself."
+      },
+      {
+        id: 12,
+        category: "Motivational Message",
+        text: "Even the tallest mountain is climbed one steady step at a time. Take a breath, reset, and keep going!"
+      },
+
+      // --- CATEGORY 3: CUTE COMPLIMENT (6 items) ---
+      {
+        id: 13,
+        category: "Cute Compliment",
+        text: "You make the world a little brighter just by being in it."
+      },
+      {
+        id: 14,
+        category: "Cute Compliment",
+        text: "Your smile and positive energy have a way of making everyone around you feel more welcome."
+      },
+      {
+        id: 15,
+        category: "Cute Compliment",
+        text: "Someone out there is genuinely grateful that they got to cross paths with you today."
+      },
+      {
+        id: 16,
+        category: "Cute Compliment",
+        text: "You have a rare kind of kindness that makes ordinary days feel a whole lot lighter."
+      },
+      {
+        id: 17,
+        category: "Cute Compliment",
+        text: "Your curiosity, effort, and sense of humour bring something truly special to this room."
+      },
+      {
+        id: 18,
+        category: "Cute Compliment",
+        text: "If good vibes were a university course, you would easily be top of the honour roll!"
+      },
+
+      // --- CATEGORY 4: RANDOM HAPPINESS CHALLENGE (6 items) ---
+      {
+        id: 19,
+        category: "Random Happiness Challenge",
+        text: "Give someone in this room a genuine compliment. Make their day!"
+      },
+      {
+        id: 20,
+        category: "Random Happiness Challenge",
+        text: "Turn to the person sitting closest to you, give them a high-five or fist bump, and wish them a great week!"
+      },
+      {
+        id: 21,
+        category: "Random Happiness Challenge",
+        text: "Stand up, reach both arms toward the ceiling for a big 5-second stretch, and let out a happy sigh!"
+      },
+      {
+        id: 22,
+        category: "Random Happiness Challenge",
+        text: "Do a quick 3-second happy shoulder dance right where you are—bonus points if someone joins in!"
+      },
+      {
+        id: 23,
+        category: "Random Happiness Challenge",
+        text: "Think of three things you are grateful for today and share one of them with a classmate next to you."
+      },
+      {
+        id: 24,
+        category: "Random Happiness Challenge",
+        text: "Take one slow, deep breath, smile wide, and send a quick 'Hope you’re having a good day!' message to a friend."
+      },
+
+      // --- CATEGORY 5: VIRTUAL HUG (6 items) ---
+      {
+        id: 25,
+        category: "Virtual Hug",
+        text: "Sending you the biggest virtual hug. You are not alone!"
+      },
+      {
+        id: 26,
+        category: "Virtual Hug",
+        text: "Wrapping you in a warm virtual hug—take a moment to drop your shoulders and unclench your jaw."
+      },
+      {
+        id: 27,
+        category: "Virtual Hug",
+        text: "Here is a pocket-sized virtual hug to carry with you through lectures, deadlines, and busy afternoons."
+      },
+      {
+        id: 28,
+        category: "Virtual Hug",
+        text: "Consider this a giant, warm bear hug reminding you that you are valued, supported, and appreciated."
+      },
+      {
+        id: 29,
+        category: "Virtual Hug",
+        text: "Whenever today feels a little heavy, remember there is a whole room of people rooting for you. Big hug!"
+      },
+      {
+        id: 30,
+        category: "Virtual Hug",
+        text: "Sending a cozy virtual hug your way—pause for five seconds and let yourself just be proud of getting through today."
+      },
+
+      // --- CATEGORY 6: POSITIVE AFFIRMATION (6 items) ---
+      {
+        id: 31,
+        category: "Positive Affirmation",
+        text: "I am growing at my own pace, and that is enough."
+      },
+      {
+        id: 32,
+        category: "Positive Affirmation",
+        text: "I deserve rest, kindness, and moments of simple joy even on my busiest days."
+      },
+      {
+        id: 33,
+        category: "Positive Affirmation",
+        text: "I am capable of handling whatever today brings, one step at a time."
+      },
+      {
+        id: 34,
+        category: "Positive Affirmation",
+        text: "My worth is not measured by a to-do list; I am already enough just as I am."
+      },
+      {
+        id: 35,
+        category: "Positive Affirmation",
+        text: "I choose to celebrate small wins and welcome good moments into my day."
+      },
+      {
+        id: 36,
+        category: "Positive Affirmation",
+        text: "I bring value, warmth, and unique strengths wherever I go."
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * 2. CATEGORY VISUAL CONFIGURATION (Icons, Colors, & URL Slugs)
+     * ============================================================================
+     */
+    const CATEGORY_STYLES = {
+      "Funny Joke": {
+        emoji: "😂",
+        slug: "funny-joke",
+        badgeClasses: "bg-amber-100 text-amber-900 border-amber-300",
+        cardBorderClass: "border-amber-300",
+        hint: "Laughter is an instant mood reset!"
+      },
+      "Motivational Message": {
+        emoji: "🚀",
+        slug: "motivational-message",
+        badgeClasses: "bg-sky-100 text-sky-900 border-sky-300",
+        cardBorderClass: "border-sky-300",
+        hint: "A little encouragement to keep your momentum going."
+      },
+      "Cute Compliment": {
+        emoji: "✨",
+        slug: "cute-compliment",
+        badgeClasses: "bg-rose-100 text-rose-900 border-rose-300",
+        cardBorderClass: "border-rose-300",
+        hint: "A friendly reminder of the good you bring to others."
+      },
+      "Random Happiness Challenge": {
+        emoji: "🎯",
+        slug: "happiness-challenge",
+        badgeClasses: "bg-emerald-100 text-emerald-900 border-emerald-300",
+        cardBorderClass: "border-emerald-300",
+        hint: "Mini challenge unlocked—give it a try right now!"
+      },
+      "Virtual Hug": {
+        emoji: "🤗",
+        slug: "virtual-hug",
+        badgeClasses: "bg-purple-100 text-purple-900 border-purple-300",
+        cardBorderClass: "border-purple-300",
+        hint: "Take a deep breath and feel the support."
+      },
+      "Positive Affirmation": {
+        emoji: "🌱",
+        slug: "positive-affirmation",
+        badgeClasses: "bg-teal-100 text-teal-900 border-teal-300",
+        cardBorderClass: "border-teal-300",
+        hint: "Say this quietly—or out loud—to yourself today."
+      }
+    };
+
+    const ALL_FILTER_KEY = "All Surprises";
+
+    /**
+     * ============================================================================
+     * 3. APPLICATION STATE & DOM REFERENCES
+     * ============================================================================
+     */
+    let activeCategory = ALL_FILTER_KEY;
+    let lastSurpriseId = null;
+    let currentSurprise = null;
+    let smilesSharedCount = 0;
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    // DOM Elements
+    const happinessButton = document.getElementById("happinessButton");
+    const surpriseCard = document.getElementById("surpriseCard");
+    const cardContentWrapper = document.getElementById("cardContentWrapper");
+    const categoryBadge = document.getElementById("categoryBadge");
+    const categoryEmoji = document.getElementById("categoryEmoji");
+    const categoryLabel = document.getElementById("categoryLabel");
+    const surpriseMessage = document.getElementById("surpriseMessage");
+    const categoryHint = document.getElementById("categoryHint");
+    const browserUrlText = document.getElementById("browserUrlText");
+    const surpriseIndexBadge = document.getElementById("surpriseIndexBadge");
+    const smilesCounterEl = document.getElementById("smilesCounter");
+    const filterPillsContainer = document.getElementById("filterPillsContainer");
+    const copySurpriseBtn = document.getElementById("copySurpriseBtn");
+    const copyBtnIcon = document.getElementById("copyBtnIcon");
+    const copyBtnText = document.getElementById("copyBtnText");
+    const soundToggleBtn = document.getElementById("soundToggleBtn");
+    const soundIcon = document.getElementById("soundIcon");
+    const soundLabel = document.getElementById("soundLabel");
+
+    /**
+     * ============================================================================
+     * 4. GENTLE WEB AUDIO SYNTHESIZER (Zero External Sound URLs Needed)
+     * ============================================================================
+     */
+    function playHappyChime() {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContextClass();
+        }
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+
+        // Play a warm, uplifting major triad arpeggio (C5 -> E5 -> G5 -> C6)
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        const now = audioCtx.currentTime;
+
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now + idx * 0.055);
+
+          gain.gain.setValueAtTime(0.0001, now + idx * 0.055);
+          gain.gain.exponentialRampToValueAtTime(0.08, now + idx * 0.055 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.055 + 0.35);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now + idx * 0.055);
+          osc.stop(now + idx * 0.055 + 0.38);
+        });
+      } catch (err) {
+        // Gracefully ignore if browser restricts audio playback
+      }
+    }
+
+    soundToggleBtn.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundIcon.textContent = soundEnabled ? "🔊" : "🔇";
+      soundLabel.textContent = soundEnabled ? "Chime On" : "Chime Off";
+      if (soundEnabled) playHappyChime();
+    });
+
+    /**
+     * ============================================================================
+     * 5. CELEBRATORY CONFETTI & SPARKLE PARTICLE ENGINE (HTML5 Canvas)
+     * ============================================================================
+     */
+    const confettiCanvas = document.getElementById("confettiCanvas");
+    const ctx = confettiCanvas.getContext("2d");
+    let particles = [];
+    let animationFrameId = null;
+
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeConfettiCanvas);
+    resizeConfettiCanvas();
+
+    const CONFETTI_COLORS = [
+      "#F59E0B", // Amber
+      "#EA580C", // Orange
+      "#F43F5E", // Rose
+      "#10B981", // Emerald
+      "#0284C7", // Sky Blue
+      "#A855F7", // Purple
+      "#FACC15"  // Bright Yellow
+    ];
+
+    function burstConfettiAroundCard() {
+      const rect = surpriseCard.getBoundingClientRect();
+      // Spawn bursts from left, center, and right along the upper half of the card
+      const origins = [
+        { x: rect.left + rect.width * 0.25, y: rect.top + rect.height * 0.3 },
+        { x: rect.left + rect.width * 0.50, y: rect.top + rect.height * 0.2 },
+        { x: rect.left + rect.width * 0.75, y: rect.top + rect.height * 0.3 }
+      ];
+
+      origins.forEach((origin) => {
+        for (let i = 0; i < 22; i++) {
+          const angle = (Math.PI * 2 * Math.random());
+          const speed = 3 + Math.random() * 6.5;
+          const shapes = ["rect", "circle", "sparkle"];
+          particles.push({
+            x: origin.x,
+            y: origin.y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 3.2, // slight upward bias
+            size: 5 + Math.random() * 6,
+            color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 12,
+            alpha: 1,
+            decay: 0.014 + Math.random() * 0.012
+          });
+        }
+      });
+
+      if (!animationFrameId) {
+        animateConfetti();
+      }
+    }
+
+    function drawSparkle(cx, cy, radius) {
+      ctx.beginPath();
+      for (let i = 0; i < 4; i++) {
+        const angle = (i * Math.PI) / 2;
+        const outerX = cx + Math.cos(angle) * radius;
+        const outerY = cy + Math.sin(angle) * radius;
+        const innerAngle = angle + Math.PI / 4;
+        const innerX = cx + Math.cos(innerAngle) * (radius * 0.32);
+        const innerY = cy + Math.sin(innerAngle) * (radius * 0.32);
+        if (i === 0) ctx.moveTo(outerX, outerY);
+        else ctx.lineTo(outerX, outerY);
+        ctx.lineTo(innerX, innerY);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.18; // gentle gravity
+        p.vx *= 0.985; // subtle air drag
+        p.rotation += p.rotationSpeed;
+        p.alpha -= p.decay;
+
+        if (p.alpha > 0) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === "rect") {
+            ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.65);
+          } else if (p.shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size * 0.45, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            drawSparkle(0, 0, p.size * 0.75);
+          }
+          ctx.restore();
+        }
+      });
+
+      particles = particles.filter((p) => p.alpha > 0);
+
+      if (particles.length > 0) {
+        animationFrameId = requestAnimationFrame(animateConfetti);
+      } else {
+        animationFrameId = null;
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }
+    }
+
+    /**
+     * ============================================================================
+     * 6. NO-REPEAT RANDOM SELECTION & DISPLAY LOGIC
+     * ============================================================================
+     */
+    function getFilteredSurprises() {
+      if (activeCategory === ALL_FILTER_KEY) {
+        return SURPRISES;
+      }
+      return SURPRISES.filter((item) => item.category === activeCategory);
+    }
+
+    function pickNextSurprise() {
+      const pool = getFilteredSurprises();
+      if (pool.length === 0) return null;
+
+      // Ensure we never pick the exact same surprise twice in a row when >1 options exist
+      let candidates = pool;
+      if (pool.length > 1 && lastSurpriseId !== null) {
+        candidates = pool.filter((item) => item.id !== lastSurpriseId);
+      }
+
+      const randomIndex = Math.floor(Math.random() * candidates.length);
+      return candidates[randomIndex];
+    }
+
+    function triggerHappinessSurprise() {
+      const selected = pickNextSurprise();
+      if (!selected) return;
+
+      lastSurpriseId = selected.id;
+      currentSurprise = selected;
+
+      // Increment Smiles Shared Counter with bump animation
+      smilesSharedCount += 1;
+      smilesCounterEl.textContent = smilesSharedCount;
+      smilesCounterEl.classList.remove("counter-bump");
+      void smilesCounterEl.offsetWidth; // trigger reflow
+      smilesCounterEl.classList.add("counter-bump");
+
+      // Retrieve Category Theme
+      const style = CATEGORY_STYLES[selected.category];
+
+      // Update Browser Window Card Border & URL Motif
+      surpriseCard.className = `w-full max-w-3xl bg-white rounded-3xl border-2 ${style.cardBorderClass} shadow-[0_20px_50px_-12px_rgba(30,41,59,0.14)] overflow-hidden transition-all duration-300`;
+      browserUrlText.textContent = `happylife.edu/404-bad-mood-not-found/${style.slug}`;
+      surpriseIndexBadge.textContent = `#${String(selected.id).padStart(2, "0")} / ${SURPRISES.length}`;
+
+      // Update Category Badge
+      categoryBadge.className = `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm sm:text-base font-bold border-2 ${style.badgeClasses} mb-5 sm:mb-6 shadow-xs`;
+      categoryEmoji.textContent = style.emoji;
+      categoryLabel.textContent = selected.category;
+
+      // Update Message & Footer Hint
+      surpriseMessage.textContent = `“${selected.text}”`;
+      categoryHint.textContent = style.hint;
+
+      // Reveal Copy Button & Reset Copy Label
+      copySurpriseBtn.classList.remove("hidden");
+      copyBtnIcon.textContent = "📋";
+      copyBtnText.textContent = "Copy Surprise";
+
+      // Trigger Smooth Card Content Reveal Animation
+      cardContentWrapper.classList.remove("reveal-animate");
+      void cardContentWrapper.offsetWidth; // force DOM reflow to restart animation
+      cardContentWrapper.classList.add("reveal-animate");
+
+      // Trigger Confetti & Optional Gentle Chime
+      burstConfettiAroundCard();
+      playHappyChime();
+    }
+
+    /**
+     * ============================================================================
+     * 7. CATEGORY FILTER PILLS RENDERING & INTERACTION
+     * ============================================================================
+     */
+    function renderFilterPills() {
+      const filterOptions = [
+        { key: ALL_FILTER_KEY, emoji: "🎲", label: "All Surprises" },
+        ...Object.keys(CATEGORY_STYLES).map((catKey) => ({
+          key: catKey,
+          emoji: CATEGORY_STYLES[catKey].emoji,
+          label: catKey
+        }))
+      ];
+
+      filterPillsContainer.innerHTML = "";
+
+      filterOptions.forEach((opt) => {
+        const isActive = activeCategory === opt.key;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+        btn.className = isActive
+          ? "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-bold bg-slate-900 text-white shadow-sm transition transform scale-105 cursor-pointer"
+          : "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/85 hover:bg-amber-100/80 text-slate-700 border border-slate-200/90 transition cursor-pointer";
+
+        btn.innerHTML = `<span>${opt.emoji}</span><span>${opt.label}</span>`;
+
+        btn.addEventListener("click", () => {
+          activeCategory = opt.key;
+          renderFilterPills();
+          // Automatically reveal a surprise from the newly chosen filter for seamless live demos!
+          triggerHappinessSurprise();
+        });
+
+        filterPillsContainer.appendChild(btn);
+      });
+    }
+
+    /**
+     * ============================================================================
+     * 8. CLIPBOARD COPY & KEYBOARD SHORTCUT HANDLERS
+     * ============================================================================
+     */
+    copySurpriseBtn.addEventListener("click", () => {
+      if (!currentSurprise) return;
+      const shareText = `${CATEGORY_STYLES[currentSurprise.category].emoji} [${currentSurprise.category}] "${currentSurprise.text}" — 404: BAD MOOD NOT FOUND`;
+
+      // Use document.execCommand('copy') for reliable iFrame/sandbox support
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = shareText;
+      tempTextArea.style.position = "fixed";
+      tempTextArea.style.opacity = "0";
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+
+      try {
+        document.execCommand("copy");
+        copyBtnIcon.textContent = "✅";
+        copyBtnText.textContent = "Copied!";
+        setTimeout(() => {
+          copyBtnIcon.textContent = "📋";
+          copyBtnText.textContent = "Copy Surprise";
+        }, 2000);
+      } catch (err) {
+        copyBtnText.textContent = "Selected!";
+      } finally {
+        document.body.removeChild(tempTextArea);
+      }
+    });
+
+    // Main Happiness Button Click Listener
+    happinessButton.addEventListener("click", () => {
+      triggerHappinessSurprise();
+    });
+
+    /**
+     * ============================================================================
+     * 9. ZERO-DEPENDENCY PURE-JAVASCRIPT QR CODE GENERATOR (ISO/IEC 18004 Model 2)
+     * ----------------------------------------------------------------------------
+     * Generates valid, high-contrast QR Codes (Versions 1–12, ECC Level M) with
+     * full Reed-Solomon GF(256) error correction, finder/timing/alignment patterns,
+     * and optimal ISO 8-mask evaluation — 100% self-contained with zero external APIs.
+     * ============================================================================
+     */
+    const PureQRCode = (() => {
+      // Galois Field GF(256) tables with primitive polynomial 0x11D
+      const GF_EXP = new Uint8Array(512);
+      const GF_LOG = new Uint8Array(256);
+      let x = 1;
+      for (let i = 0; i < 255; i++) {
+        GF_EXP[i] = x;
+        GF_LOG[x] = i;
+        x <<= 1;
+        if (x & 0x100) x ^= 0x11d;
+      }
+      for (let i = 255; i < 512; i++) {
+        GF_EXP[i] = GF_EXP[i - 255];
+      }
+
+      function gfMul(a, b) {
+        if (a === 0 || b === 0) return 0;
+        return GF_EXP[GF_LOG[a] + GF_LOG[b]];
+      }
+
+      function rsGeneratorPoly(degree) {
+        let poly = [1];
+        for (let i = 0; i < degree; i++) {
+          const next = new Array(poly.length + 1).fill(0);
+          const factor = GF_EXP[i];
+          for (let j = 0; j < poly.length; j++) {
+            next[j] ^= poly[j];
+            next[j + 1] ^= gfMul(poly[j], factor);
+          }
+          poly = next;
+        }
+        return poly;
+      }
+
+      function rsComputeRemainder(data, ecLen) {
+        const gen = rsGeneratorPoly(ecLen);
+        const res = new Uint8Array(data.length + ecLen);
+        res.set(data);
+        for (let i = 0; i < data.length; i++) {
+          const coef = res[i];
+          if (coef !== 0) {
+            for (let j = 1; j < gen.length; j++) {
+              res[i + j] ^= gfMul(gen[j], coef);
+            }
+          }
+        }
+        return res.slice(data.length);
+      }
+
+      // ECC Level M block table for Versions 1 to 12:
+      // [totalCodewords, ecPerBlock, g1Blocks, g1Data, g2Blocks, g2Data]
+      const ECC_M_TABLE = [
+        null,
+        [26, 10, 1, 16, 0, 0],   // V1 (21x21)
+        [44, 16, 1, 28, 0, 0],   // V2 (25x25)
+        [70, 26, 1, 44, 0, 0],   // V3 (29x29)
+        [100, 18, 2, 32, 0, 0],  // V4 (33x33)
+        [134, 24, 2, 43, 0, 0],  // V5 (37x37)
+        [172, 16, 4, 27, 0, 0],  // V6 (41x41)
+        [196, 18, 4, 31, 0, 0],  // V7 (45x45)
+        [242, 22, 2, 38, 2, 39], // V8 (49x49)
+        [292, 22, 3, 36, 2, 37], // V9 (53x53)
+        [346, 26, 4, 43, 1, 44], // V10 (57x57)
+        [404, 30, 1, 50, 4, 51], // V11 (61x61)
+        [466, 22, 6, 36, 2, 37]  // V12 (65x65)
+      ];
+
+      const ALIGNMENT_CENTERS = [
+        null,
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],
+        [6, 32, 58]
+      ];
+
+      function encodeBytes(text) {
+        if (typeof TextEncoder !== "undefined") {
+          return new TextEncoder().encode(text);
+        }
+        const utf8 = unescape(encodeURIComponent(text));
+        const arr = new Uint8Array(utf8.length);
+        for (let i = 0; i < utf8.length; i++) arr[i] = utf8.charCodeAt(i);
+        return arr;
+      }
+
+      function buildCodewords(bytes) {
+        let version = -1;
+        for (let v = 1; v <= 12; v++) {
+          const [, , g1B, g1D, g2B, g2D] = ECC_M_TABLE[v];
+          const totalDataBytes = g1B * g1D + g2B * g2D;
+          const charCountBits = v <= 9 ? 8 : 16;
+          const neededBits = 4 + charCountBits + bytes.length * 8;
+          if (neededBits <= totalDataBytes * 8) {
+            version = v;
+            break;
+          }
+        }
+        if (version === -1) {
+          // Truncate gracefully if an extraordinarily long URL (>287 bytes) is pasted
+          bytes = bytes.slice(0, 280);
+          version = 12;
+        }
+
+        const [, ecPerBlock, g1B, g1D, g2B, g2D] = ECC_M_TABLE[version];
+        const totalDataBytes = g1B * g1D + g2B * g2D;
+        const capacityBits = totalDataBytes * 8;
+        const charCountBits = version <= 9 ? 8 : 16;
+
+        const bits = [];
+        const pushBits = (val, len) => {
+          for (let i = len - 1; i >= 0; i--) {
+            bits.push((val >>> i) & 1);
+          }
+        };
+
+        // Mode indicator: Byte mode (0100) + character count
+        pushBits(0b0100, 4);
+        pushBits(bytes.length, charCountBits);
+        for (let i = 0; i < bytes.length; i++) {
+          pushBits(bytes[i], 8);
+        }
+
+        // Terminator (up to 4 zero bits)
+        const termLen = Math.min(4, capacityBits - bits.length);
+        pushBits(0, termLen);
+
+        // Pad to byte boundary
+        while (bits.length % 8 !== 0) {
+          bits.push(0);
+        }
+
+        // Convert bitstream to data codewords and pad with alternating 0xEC, 0x11
+        const dataCodewords = [];
+        for (let i = 0; i < bits.length; i += 8) {
+          let byte = 0;
+          for (let b = 0; b < 8; b++) byte = (byte << 1) | bits[i + b];
+          dataCodewords.push(byte);
+        }
+        const padBytes = [0xec, 0x11];
+        let padIdx = 0;
+        while (dataCodewords.length < totalDataBytes) {
+          dataCodewords.push(padBytes[padIdx % 2]);
+          padIdx++;
+        }
+
+        // Split into RS blocks & compute EC codewords
+        const dataBlocks = [];
+        const ecBlocks = [];
+        let offset = 0;
+
+        for (let i = 0; i < g1B; i++) {
+          const block = dataCodewords.slice(offset, offset + g1D);
+          offset += g1D;
+          dataBlocks.push(block);
+          ecBlocks.push(rsComputeRemainder(block, ecPerBlock));
+        }
+        for (let i = 0; i < g2B; i++) {
+          const block = dataCodewords.slice(offset, offset + g2D);
+          offset += g2D;
+          dataBlocks.push(block);
+          ecBlocks.push(rsComputeRemainder(block, ecPerBlock));
+        }
+
+        // Interleave data codewords, then EC codewords
+        const finalCodewords = [];
+        const maxDataLen = Math.max(g1D, g2D);
+        for (let col = 0; col < maxDataLen; col++) {
+          for (let b = 0; b < dataBlocks.length; b++) {
+            if (col < dataBlocks[b].length) {
+              finalCodewords.push(dataBlocks[b][col]);
+            }
+          }
+        }
+        for (let col = 0; col < ecPerBlock; col++) {
+          for (let b = 0; b < ecBlocks.length; b++) {
+            finalCodewords.push(ecBlocks[b][col]);
+          }
+        }
+
+        return { version, codewords: finalCodewords };
+      }
+
+      function createMatrix(version, codewords) {
+        const size = version * 4 + 17;
+        const modules = Array.from({ length: size }, () => new Uint8Array(size));
+        const isFunction = Array.from({ length: size }, () => new Uint8Array(size));
+
+        const setFunctionModule = (r, c, dark) => {
+          if (r >= 0 && r < size && c >= 0 && c < size) {
+            modules[r][c] = dark ? 1 : 0;
+            isFunction[r][c] = 1;
+          }
+        };
+
+        // 1. Finder patterns (7x7) + 1-module white separators
+        const drawFinder = (topR, leftC) => {
+          for (let dr = -1; dr <= 7; dr++) {
+            for (let dc = -1; dc <= 7; dc++) {
+              const r = topR + dr;
+              const c = leftC + dc;
+              if (r < 0 || r >= size || c < 0 || c >= size) continue;
+              const inOuter = dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6;
+              const inBorder = dr === 0 || dr === 6 || dc === 0 || dc === 6;
+              const inCenter = dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4;
+              setFunctionModule(r, c, inOuter && (inBorder || inCenter));
+            }
+          }
+        };
+        drawFinder(0, 0);
+        drawFinder(0, size - 7);
+        drawFinder(size - 7, 0);
+
+        // 2. Timing patterns (row 6 and col 6)
+        for (let i = 8; i < size - 8; i++) {
+          const dark = i % 2 === 0;
+          if (!isFunction[6][i]) setFunctionModule(6, i, dark);
+          if (!isFunction[i][6]) setFunctionModule(i, 6, dark);
+        }
+
+        // 3. Alignment patterns (5x5)
+        const centers = ALIGNMENT_CENTERS[version];
+        for (let i = 0; i < centers.length; i++) {
+          for (let j = 0; j < centers.length; j++) {
+            const cr = centers[i];
+            const cc = centers[j];
+            // Skip finder corners
+            if ((cr === 6 && cc === 6) || (cr === 6 && cc === size - 7) || (cr === size - 7 && cc === 6)) {
+              continue;
+            }
+            for (let dr = -2; dr <= 2; dr++) {
+              for (let dc = -2; dc <= 2; dc++) {
+                const dark = Math.max(Math.abs(dr), Math.abs(dc)) !== 1;
+                setFunctionModule(cr + dr, cc + dc, dark);
+              }
+            }
+          }
+        }
+
+        // 4. Reserve format information + dark module
+        for (let i = 0; i <= 8; i++) {
+          if (!isFunction[8][i]) setFunctionModule(8, i, false);
+          if (!isFunction[i][8]) setFunctionModule(i, 8, false);
+        }
+        for (let i = 0; i < 8; i++) {
+          setFunctionModule(8, size - 1 - i, false);
+          if (i < 7) setFunctionModule(size - 1 - i, 8, false);
+        }
+        setFunctionModule(size - 8, 8, true); // Always-dark module
+
+        // 5. Version information (for Version >= 7)
+        if (version >= 7) {
+          let d = version << 12;
+          for (let i = 5; i >= 0; i--) {
+            if ((d >>> (i + 12)) & 1) d ^= 0x1f25 << i;
+          }
+          const versionBits = (version << 12) | d;
+          for (let i = 0; i < 18; i++) {
+            const bit = ((versionBits >>> i) & 1) === 1;
+            const a = size - 11 + (i % 3);
+            const b = Math.floor(i / 3);
+            setFunctionModule(a, b, bit);
+            setFunctionModule(b, a, bit);
+          }
+        }
+
+        // 6. Zig-zag data bit placement
+        let bitIdx = 0;
+        const totalBits = codewords.length * 8;
+        let upward = true;
+
+        for (let rightCol = size - 1; rightCol >= 1; rightCol -= 2) {
+          if (rightCol === 6) rightCol = 5; // Skip vertical timing column 6
+          for (let step = 0; step < size; step++) {
+            const r = upward ? size - 1 - step : step;
+            for (let offset = 0; offset < 2; offset++) {
+              const c = rightCol - offset;
+              if (!isFunction[r][c]) {
+                let dark = false;
+                if (bitIdx < totalBits) {
+                  const cw = codewords[bitIdx >>> 3];
+                  dark = ((cw >>> (7 - (bitIdx & 7))) & 1) === 1;
+                  bitIdx++;
+                }
+                modules[r][c] = dark ? 1 : 0;
+              }
+            }
+          }
+          upward = !upward;
+        }
+
+        // 7. Apply best of 8 ISO mask patterns
+        const applyFormatBits = (grid, mask) => {
+          const data = mask; // ECC M is 00, so (0 << 3) | mask === mask
+          let d = data << 10;
+          for (let i = 4; i >= 0; i--) {
+            if ((d >>> (i + 10)) & 1) d ^= 0x537 << i;
+          }
+          const fmt = ((data << 10) | d) ^ 0x5412;
+
+          for (let i = 0; i <= 5; i++) grid[8][i] = (fmt >>> i) & 1;
+          grid[8][7] = (fmt >>> 6) & 1;
+          grid[8][8] = (fmt >>> 7) & 1;
+          grid[7][8] = (fmt >>> 8) & 1;
+          for (let i = 9; i < 15; i++) grid[14 - i][8] = (fmt >>> i) & 1;
+
+          for (let i = 0; i < 8; i++) grid[8][size - 1 - i] = (fmt >>> i) & 1;
+          for (let i = 8; i < 15; i++) grid[size - 15 + i][8] = (fmt >>> i) & 1;
+          grid[size - 8][8] = 1;
+        };
+
+        const maskCondition = (mask, r, c) => {
+          switch (mask) {
+            case 0: return (r + c) % 2 === 0;
+            case 1: return r % 2 === 0;
+            case 2: return c % 3 === 0;
+            case 3: return (r + c) % 3 === 0;
+            case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+            case 5: return ((r * c) % 2) + ((r * c) % 3) === 0;
+            case 6: return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+            case 7: return (((r + c) % 2) + ((r * c) % 3)) % 2 === 0;
+            default: return false;
+          }
+        };
+
+        const evaluatePenalty = (grid) => {
+          let penalty = 0;
+          // Rule 1: 5+ consecutive same-color modules in rows/cols
+          for (let r = 0; r < size; r++) {
+            let runColor = grid[r][0];
+            let runLen = 1;
+            for (let c = 1; c < size; c++) {
+              if (grid[r][c] === runColor) {
+                runLen++;
+                if (runLen === 5) penalty += 3;
+                else if (runLen > 5) penalty += 1;
+              } else {
+                runColor = grid[r][c];
+                runLen = 1;
+              }
+            }
+          }
+          for (let c = 0; c < size; c++) {
+            let runColor = grid[0][c];
+            let runLen = 1;
+            for (let r = 1; r < size; r++) {
+              if (grid[r][c] === runColor) {
+                runLen++;
+                if (runLen === 5) penalty += 3;
+                else if (runLen > 5) penalty += 1;
+              } else {
+                runColor = grid[r][c];
+                runLen = 1;
+              }
+            }
+          }
+          // Rule 2: 2x2 solid blocks
+          for (let r = 0; r < size - 1; r++) {
+            for (let c = 0; c < size - 1; c++) {
+              const v = grid[r][c];
+              if (v === grid[r][c + 1] && v === grid[r + 1][c] && v === grid[r + 1][c + 1]) {
+                penalty += 3;
+              }
+            }
+          }
+          // Rule 4: Dark/Light balance
+          let darkCount = 0;
+          for (let r = 0; r < size; r++) {
+            for (let c = 0; c < size; c++) darkCount += grid[r][c];
+          }
+          const percent = (darkCount * 100) / (size * size);
+          penalty += Math.floor(Math.abs(percent - 50) / 5) * 10;
+          return penalty;
+        };
+
+        let bestGrid = null;
+        let lowestPenalty = Infinity;
+
+        for (let mask = 0; mask < 8; mask++) {
+          const candidate = modules.map((row) => new Uint8Array(row));
+          for (let r = 0; r < size; r++) {
+            for (let c = 0; c < size; c++) {
+              if (!isFunction[r][c] && maskCondition(mask, r, c)) {
+                candidate[r][c] ^= 1;
+              }
+            }
+          }
+          applyFormatBits(candidate, mask);
+          const score = evaluatePenalty(candidate);
+          if (score < lowestPenalty) {
+            lowestPenalty = score;
+            bestGrid = candidate;
+          }
+        }
+
+        return bestGrid;
+      }
+
+      function generate(text) {
+        const cleanText = (text || "").trim() || "https://happylife-project.github.io/404-bad-mood-not-found/";
+        const bytes = encodeBytes(cleanText);
+        const { version, codewords } = buildCodewords(bytes);
+        return createMatrix(version, codewords);
+      }
+
+      return { generate };
+    })();
+
+    /**
+     * ============================================================================
+     * 10. CLASSROOM QR MODAL CONTROLLER, LIVE URL SYNC & PNG DOWNLOAD
+     * ============================================================================
+     */
+    const openQrModalBtn = document.getElementById("openQrModalBtn");
+    const closeQrModalBtn = document.getElementById("closeQrModalBtn");
+    const closeQrModalBottomBtn = document.getElementById("closeQrModalBottomBtn");
+    const qrModal = document.getElementById("qrModal");
+    const qrCanvas = document.getElementById("qrCanvas");
+    const qrUrlInput = document.getElementById("qrUrlInput");
+    const qrLocalNotice = document.getElementById("qrLocalNotice");
+    const copyQrUrlBtn = document.getElementById("copyQrUrlBtn");
+    const copyQrUrlLabel = document.getElementById("copyQrUrlLabel");
+    const downloadQrBtn = document.getElementById("downloadQrBtn");
+
+    const SAMPLE_HOSTED_URL = "https://happylife-project.github.io/404-bad-mood-not-found/";
+
+    function isHostedHttpUrl() {
+      const proto = window.location.protocol;
+      const href = window.location.href || "";
+      return (proto === "http:" || proto === "https:") && !href.startsWith("about:");
+    }
+
+    function renderQrToCanvas(urlText) {
+      const matrix = PureQRCode.generate(urlText);
+      const moduleCount = matrix.length;
+      const quietZone = 4; // Standard 4-module white border on all 4 sides
+      const totalModules = moduleCount + quietZone * 2;
+
+      const canvasSize = 960; // High-DPI internal resolution for razor-sharp projection & PNG export
+      qrCanvas.width = canvasSize;
+      qrCanvas.height = canvasSize;
+
+      const qCtx = qrCanvas.getContext("2d");
+      qCtx.imageSmoothingEnabled = false;
+
+      // Pure white background (#FFFFFF)
+      qCtx.fillStyle = "#FFFFFF";
+      qCtx.fillRect(0, 0, canvasSize, canvasSize);
+
+      // Compute integer module pixel size centered cleanly inside the canvas
+      const cellSize = Math.floor(canvasSize / totalModules);
+      const qrPixelSpan = cellSize * totalModules;
+      const offset = Math.floor((canvasSize - qrPixelSpan) / 2);
+
+      // Pure black modules (#000000)
+      qCtx.fillStyle = "#000000";
+      for (let r = 0; r < moduleCount; r++) {
+        for (let c = 0; c < moduleCount; c++) {
+          if (matrix[r][c] === 1) {
+            qCtx.fillRect(
+              offset + (c + quietZone) * cellSize,
+              offset + (r + quietZone) * cellSize,
+              cellSize,
+              cellSize
+            );
+          }
+        }
+      }
+    }
+
+    function openQrModal() {
+      qrModal.classList.remove("hidden");
+      renderQrToCanvas(qrUrlInput.value);
+    }
+
+    function closeQrModal() {
+      qrModal.classList.add("hidden");
+    }
+
+    function isQrModalOpen() {
+      return !qrModal.classList.contains("hidden");
+    }
+
+    // Initialize default URL & local preview notice
+    function initClassroomQrCode() {
+      if (isHostedHttpUrl()) {
+        qrUrlInput.value = window.location.href;
+        qrLocalNotice.classList.add("hidden");
+      } else {
+        qrUrlInput.value = SAMPLE_HOSTED_URL;
+        qrLocalNotice.classList.remove("hidden");
+      }
+      renderQrToCanvas(qrUrlInput.value);
+    }
+
+    openQrModalBtn.addEventListener("click", openQrModal);
+    closeQrModalBtn.addEventListener("click", closeQrModal);
+    closeQrModalBottomBtn.addEventListener("click", closeQrModal);
+
+    // Close modal when clicking outside the white card
+    qrModal.addEventListener("click", (event) => {
+      if (event.target === qrModal) {
+        closeQrModal();
+      }
+    });
+
+    // Update QR code live as presenter types or pastes a URL
+    qrUrlInput.addEventListener("input", () => {
+      renderQrToCanvas(qrUrlInput.value);
+    });
+
+    // Copy encoded URL button
+    copyQrUrlBtn.addEventListener("click", () => {
+      const urlToCopy = qrUrlInput.value.trim() || SAMPLE_HOSTED_URL;
+      const tempInput = document.createElement("textarea");
+      tempInput.value = urlToCopy;
+      tempInput.style.position = "fixed";
+      tempInput.style.opacity = "0";
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        copyQrUrlLabel.textContent = "Copied!";
+        setTimeout(() => {
+          copyQrUrlLabel.textContent = "Copy Link";
+        }, 1800);
+      } catch (err) {
+        copyQrUrlLabel.textContent = "Selected";
+      } finally {
+        document.body.removeChild(tempInput);
+      }
+    });
+
+    // Download crisp high-resolution PNG of the QR Code for slides
+    downloadQrBtn.addEventListener("click", () => {
+      renderQrToCanvas(qrUrlInput.value);
+      const link = document.createElement("a");
+      link.download = "404-bad-mood-not-found-class-qr.png";
+      link.href = qrCanvas.toDataURL("image/png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // Keyboard Shortcuts: Space (Surprise), Q (Toggle Class QR), Esc (Close QR Modal)
+    window.addEventListener("keydown", (event) => {
+      const activeTag = document.activeElement ? document.activeElement.tagName : "";
+      const isTypingField =
+        activeTag === "INPUT" ||
+        activeTag === "TEXTAREA" ||
+        activeTag === "SELECT" ||
+        (document.activeElement && document.activeElement.isContentEditable);
+
+      if (event.key === "Escape" && isQrModalOpen()) {
+        event.preventDefault();
+        closeQrModal();
+        return;
+      }
+
+      if (isTypingField) return;
+
+      if ((event.key === "q" || event.key === "Q") && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        if (isQrModalOpen()) closeQrModal();
+        else openQrModal();
+        return;
+      }
+
+      if (event.code === "Space" && !isQrModalOpen() && activeTag !== "BUTTON") {
+        event.preventDefault();
+        happinessButton.classList.add("is-pressed");
+        triggerHappinessSurprise();
+        setTimeout(() => {
+          happinessButton.classList.remove("is-pressed");
+        }, 150);
+      }
+    });
+
+    // Initialize Filter Pills & Classroom QR Code on Load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderFilterPills();
+      initClassroomQrCode();
+    });
+  </script>
+</body>
+</html>
